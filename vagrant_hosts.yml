@@ -5,3 +5,5 @@
   ip: 172.20.20.11
 - name: consul3
   ip: 172.20.20.12
+- name: consul4
+  ip: 172.20.20.13
