@@ -2,8 +2,6 @@
 # vi: set ft=ruby :
 
 require 'yaml'
-require 'rbconfig'
-
 
 $script = <<SCRIPT
 
@@ -29,20 +27,16 @@ sudo mv consul /usr/bin/consul
 sudo mkdir /etc/consul.d
 sudo chmod a+w /etc/consul.d
 
-EXPECTED_SIZE=${#FULLIPLIST[@]}
-
-FULLIPLIST=($ARRAY)
-
 echo "$ARRAY" >> /home/vagrant/vagranthosts.txt
 
-
+FULLIPLIST=($(echo $ARRAY | sed "s/\<$VAGRANT_IP\>//g"))
+EXPECTED_SIZE=$(cat /home/vagrant/vagranthosts.txt  | wc -w)
 
 consul agent -server -ui \
   -bind="$VAGRANT_IP" \
   -client="0.0.0.0" \
   -retry-join="${FULLIPLIST[0]}" \
-  -retry-join="${FULLIPLIST[1]}" \
-  -retry-join="${FULLIPLIST[2]}" \
+  -retry-join="${FULLIPLIST[1]}"  \
   -bootstrap-expect="$EXPECTED_SIZE" \
   -data-dir=/tmp & sleep 1
 
