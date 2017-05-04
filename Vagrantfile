@@ -35,9 +35,10 @@ EXPECTED_SIZE=$(cat /home/vagrant/vagranthosts.txt  | wc -w)
 consul agent -server -ui \
   -bind="$VAGRANT_IP" \
   -client="0.0.0.0" \
-  -retry-join="${FULLIPLIST[0]}" \
-  -retry-join="${FULLIPLIST[1]}"  \
   -bootstrap-expect="$EXPECTED_SIZE" \
+  $(for (( i = 0; i < $EXPECTED_SIZE; i++ )); do
+  echo "-retry-join=${FULLIPLIST[$i]}"
+done) \
   -data-dir=/tmp & sleep 1
 
 SCRIPT
