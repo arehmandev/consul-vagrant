@@ -1,0 +1,7 @@
+# Consul agents stored here
+- name: consul1
+  ip: 172.20.20.10
+- name: consul2
+  ip: 172.20.20.11
+- name: consul3
+  ip: 172.20.20.12
