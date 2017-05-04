@@ -1,4 +1,4 @@
-# Consul agents stored here
+# Consul agents stored here - default is 5
 - name: consul1
   ip: 172.20.20.10
 - name: consul2
@@ -7,3 +7,5 @@
   ip: 172.20.20.12
 - name: consul4
   ip: 172.20.20.13
+- name: consul5
+  ip: 172.20.20.14
